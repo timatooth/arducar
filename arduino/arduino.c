@@ -28,10 +28,42 @@ void forward(){
   digitalWrite(FORWARD_PIN, LOW);
 }
 
+void forward_l(){
+  digitalWrite(LEFT_PIN, HIGH);
+  digitalWrite(FORWARD_PIN, HIGH);
+  delay(DELAY);
+  digitalWrite(FORWARD_PIN, LOW);
+  digitalWrite(LEFT_PIN, LOW);
+}
+
+void forward_r(){
+  digitalWrite(RIGHT_PIN, HIGH);
+  digitalWrite(FORWARD_PIN, HIGH);
+  delay(DELAY);
+  digitalWrite(FORWARD_PIN, LOW);
+  digitalWrite(RIGHT_PIN, LOW);
+}
+
 void backward(){
   digitalWrite(BACKWARD_PIN, HIGH);
   delay(DELAY);
   digitalWrite(BACKWARD_PIN, LOW);
+}
+
+void backward_l(){
+  digitalWrite(LEFT_PIN, HIGH);
+  digitalWrite(BACKWARD_PIN, HIGH);
+  delay(DELAY);
+  digitalWrite(BACKWARD_PIN, LOW);
+  digitalWrite(LEFT_PIN, LOW);
+}
+
+void backward_r(){
+  digitalWrite(RIGHT_PIN, HIGH);
+  digitalWrite(BACKWARD_PIN, HIGH);
+  delay(DELAY);
+  digitalWrite(BACKWARD_PIN, LOW);
+  digitalWrite(RIGHT_PIN, LOW);
 }
 
 void left(){
@@ -67,20 +99,16 @@ void loop(){
       right();
       break;
     case 'D':
-      right();
-      forward();
+      forward_r();
       break;
     case 'G':
-      left();
-      forward();
+      forward_l();
       break;
     case 'V':
-      left();
-      backward();
+      backward_l();
       break;
     case 'N':
-      right();
-      backward();
+      backward_r();
       break;
     }
   }

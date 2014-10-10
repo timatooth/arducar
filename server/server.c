@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
   }
 
   /* init arduino serial */
-  fprintf(stderr, "Attempting to open Arduino port: %s\n", arduinoPort);
+  fprintf(stderr, "Opening Arduino port: %s\n", arduinoPort);
   serialFD = serialport_init(arduinoPort, 9600);
   
   /* init net */
@@ -37,6 +37,7 @@ int main(int argc, char **argv) {
   serv_addr.sin_port = htons(port);
   if (bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0){ 
     fprintf(stderr, "ERROR on binding port %d\n", port);
+    exit(1);
   }
   setsockopt(sockfd,
 	     SOL_SOCKET,
@@ -44,6 +45,7 @@ int main(int argc, char **argv) {
 	     (char*)&iSetOption,
 	     sizeof(iSetOption));
   /* wait for connection (this blocks) */
+  fprintf(stderr, "Listening on port %d\n", port);
   while(1){
     listen(sockfd,5);
     clilen = sizeof(cli_addr);
