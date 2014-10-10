@@ -80,7 +80,7 @@ void right(){
 
 
 void loop(){
-  if(Serial.available() > 1){
+  if(Serial.available() > 0){
     incomingByte = Serial.read();
     switch(incomingByte){
     case 'H':
