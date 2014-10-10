@@ -66,6 +66,22 @@ void loop(){
     case 'R':
       right();
       break;
+    case 'D':
+      right();
+      forward();
+      break;
+    case 'G':
+      left();
+      forward();
+      break;
+    case 'V':
+      left();
+      backward();
+      break;
+    case 'N':
+      right();
+      backward();
+      break;
     }
   }
 }

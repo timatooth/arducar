@@ -7,9 +7,9 @@
 #include <string.h>
 #include "arduino-serial-lib.h"
 
-int main(void) {
+int main(int argc, char **argv) {
+  char *arduinoPort;
   int serialFD;
-
   /* Net stuff */
   int sockfd, newsockfd;
   int port = 9090;
@@ -18,8 +18,15 @@ int main(void) {
   struct sockaddr_in serv_addr, cli_addr;
   int iSetOption = 1;
 
+  if(argc > 1){
+    arduinoPort = argv[1];
+  } else {
+    arduinoPort = "/dev/ttyUSB0";
+  }
+
   /* init arduino serial */
-  serialFD = serialport_init("/dev/ttyUSB0", 9600);
+  fprintf(stderr, "Attempting to open Arduino port: %s\n", arduinoPort);
+  serialFD = serialport_init(arduinoPort, 9600);
   
   /* init net */
   sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
