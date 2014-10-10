@@ -3,7 +3,7 @@
 #define BACKWARD_PIN 11
 #define LEFT_PIN 10
 #define RIGHT_PIN 9
-#define DELAY 100
+#define DELAY 35
 
 char incomingByte = 0;
 
