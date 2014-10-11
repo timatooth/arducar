@@ -7,10 +7,11 @@
 #define RIGHT_PIN 9
 #define DELAY 1
 
-char incomingByte = 0;
+unsigned char incomingByte = 0;
 Servo yawServo;
 Servo pitchServo;
 unsigned int yawAngle;
+unsigned char yawByte;
 
 void setup(){
   Serial.begin(9600);
@@ -22,8 +23,8 @@ void setup(){
   pitchServo.attach(6);
   delay(10);
   yawServo.attach(5);
-  pitchServo.write(60);
-  yawServo.write(60);
+  pitchServo.write(90);
+  yawServo.write(90);
 }
 
 void horn(){
@@ -66,11 +67,6 @@ void right(){
   digitalWrite(RIGHT_PIN, HIGH);
 }
 
-void rotateServo(){
-  yawAngle++;
-  yawServo.write(yawAngle);
-}
-
 void reset(){
   digitalWrite(FORWARD_PIN, LOW);
   digitalWrite(BACKWARD_PIN, LOW);
@@ -90,7 +86,7 @@ char get_char(){
     }
     counter += 1;
   }
-  return -1;
+  return 0;
 }
 
 void loop(){
@@ -123,10 +119,10 @@ void loop(){
   case 'N':
     backward_r();
     break;
-  case 'T':
-    rotateServo();
+  case 'Y':
+    yawServo.write(get_char());
     break;
-  case -1:
+  case 0:
     reset();
     break;
   }

@@ -17,6 +17,7 @@ int main(int argc, char **argv) {
   char buffer[256];
   struct sockaddr_in serv_addr, cli_addr;
   int iSetOption = 1;
+  int bytesRead, i;
 
   if(argc > 1){
     arduinoPort = argv[1];
@@ -56,23 +57,13 @@ int main(int argc, char **argv) {
     }
 
     memset(buffer, 0, 256);
-    while(read(newsockfd, buffer, 256) > 0){
-      serialport_writebyte(serialFD, buffer[0]);
-      fprintf(stderr, "Writing byte: %c\n", buffer[0]);
-      if(buffer[0] == 'X'){
-	fprintf(stderr, "Client sent shutdown instruction\n");
-	goto END;
+    while((bytesRead = read(newsockfd, buffer, 256)) > 0){
+      for(i = 0; i < bytesRead; i++){
+	serialport_writebyte(serialFD, buffer[i]);
+	fprintf(stderr, "Writing byte: %#02x\n", buffer[i]);
       }
     }
-    /*
-      printf("Here is the message: %s\n",buffer);
-      n = write(newsockfd,"I got your message",18);
-      if (n < 0){
-      fprintf(stderr, "ERROR writing to socket\n");
-      }
-    */
   }
- END:
   close(newsockfd);
   close(sockfd);
   serialport_close(serialFD);
