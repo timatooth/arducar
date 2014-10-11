@@ -75,7 +75,7 @@ void reset(){
   digitalWrite(HORN_PIN, LOW);  
 }
 
-char get_char(){
+unsigned char get_char(){
   int counter = 0;
   char incoming_byte;
   /* 250ms wait? */
@@ -122,6 +122,8 @@ void loop(){
   case 'Y':
     yawServo.write(get_char());
     break;
+  case 'P':
+    pitchServo.write(get_char());
   case 0:
     reset();
     break;
