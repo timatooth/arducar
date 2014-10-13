@@ -21,10 +21,10 @@ void setup(){
   pinMode(LEFT_PIN, OUTPUT);
   pinMode(RIGHT_PIN, OUTPUT);
   pitchServo.attach(6);
-  delay(10);
   yawServo.attach(5);
   pitchServo.write(90);
   yawServo.write(90);
+  delay(400);
 }
 
 void horn(){
@@ -77,12 +77,10 @@ void reset(){
 
 unsigned char get_char(){
   int counter = 0;
-  char incoming_byte;
   /* 250ms wait? */
   while (counter < 30000){
     if(Serial.available() > 0){
-      incoming_byte = Serial.read();
-      return incoming_byte;
+      return Serial.read();
     }
     counter += 1;
   }
@@ -124,6 +122,7 @@ void loop(){
     break;
   case 'P':
     pitchServo.write(get_char());
+    break;
   case 0:
     reset();
     break;
