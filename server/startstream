@@ -1,0 +1,1 @@
+cvlc v4l2:///dev/video1 :live-caching=40 :sout="#transcode{vcodec=MJPG,vb=256,scale=1,width=640,height=480}:http{mux=mpjpeg,dst=:9091/stream}"

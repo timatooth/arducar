@@ -5,6 +5,8 @@
 #define BACKWARD_PIN 11
 #define LEFT_PIN 10
 #define RIGHT_PIN 9
+#define YAW_SERVO 6
+#define PITCH_SERVO 5
 #define DELAY 1
 
 unsigned char incomingByte = 0;
@@ -20,9 +22,9 @@ void setup(){
   pinMode(BACKWARD_PIN, OUTPUT);
   pinMode(LEFT_PIN, OUTPUT);
   pinMode(RIGHT_PIN, OUTPUT);
-  pitchServo.attach(6);
-  yawServo.attach(5);
-  pitchServo.write(90);
+  yawServo.attach(YAW_SERVO);
+  pitchServo.attach(PITCH_SERVO);
+  yawServo.write(90);
   yawServo.write(90);
   delay(400);
 }
